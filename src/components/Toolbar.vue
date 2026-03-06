@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 import {
   DropdownMenuRoot,
   DropdownMenuTrigger,
@@ -24,6 +26,7 @@ import { TOOLS, useEditorStore } from '@/stores/editor'
 
 import type { Tool } from '@/stores/editor'
 
+const { t } = useI18n()
 const store = useEditorStore()
 
 const toolIcons: Record<Tool, typeof IconSquare> = {
@@ -41,17 +44,17 @@ const toolIcons: Record<Tool, typeof IconSquare> = {
 }
 
 const toolLabels: Record<Tool, string> = {
-  SELECT: 'Move',
-  FRAME: 'Frame',
-  SECTION: 'Section',
-  RECTANGLE: 'Rectangle',
-  ELLIPSE: 'Ellipse',
-  LINE: 'Line',
-  POLYGON: 'Polygon',
-  STAR: 'Star',
-  PEN: 'Pen',
-  TEXT: 'Text',
-  HAND: 'Hand'
+  SELECT: t('toolbar.move'),
+  FRAME: t('toolbar.frame'),
+  SECTION: t('toolbar.section'),
+  RECTANGLE: t('toolbar.rectangle'),
+  ELLIPSE: t('toolbar.ellipse'),
+  LINE: t('toolbar.line'),
+  POLYGON: t('toolbar.polygon'),
+  STAR: t('toolbar.star'),
+  PEN: t('toolbar.pen'),
+  TEXT: t('toolbar.text'),
+  HAND: t('toolbar.hand')
 }
 
 const toolShortcuts: Record<Tool, string> = {
