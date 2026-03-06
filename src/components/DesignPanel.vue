@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import { useEditorStore } from '@/stores/editor'
 
@@ -15,6 +16,7 @@ import StrokeSection from './properties/StrokeSection.vue'
 import TypographySection from './properties/TypographySection.vue'
 import VariablesSection from './properties/VariablesSection.vue'
 
+const { t } = useI18n()
 const store = useEditorStore()
 const variablesOpen = ref(false)
 
@@ -30,8 +32,8 @@ const isComponentType = computed(() => {
   <!-- Multi-select summary -->
   <div v-if="multiCount > 1" class="flex-1 overflow-x-hidden overflow-y-auto pb-4">
     <div class="flex items-center gap-1.5 border-b border-border px-3 py-2">
-      <span class="text-[11px] text-muted">Mixed</span>
-      <span class="text-xs font-semibold">{{ multiCount }} layers</span>
+      <span class="text-[11px] text-muted">{{ t('common.mixed') }}</span>
+      <span class="text-xs font-semibold">{{ multiCount }} {{ t('common.layers') }}</span>
     </div>
     <PositionSection />
     <AppearanceSection />
@@ -59,13 +61,13 @@ const isComponentType = computed(() => {
         class="rounded bg-[#9747ff]/10 px-2 py-1 text-left text-[11px] text-[#9747ff] hover:bg-[#9747ff]/20"
         @click="store.goToMainComponent()"
       >
-        Go to Main Component
+        {{ t('common.goToMainComponent') }}
       </button>
       <button
         class="rounded px-2 py-1 text-left text-[11px] text-muted hover:bg-hover"
         @click="store.detachInstance()"
       >
-        Detach Instance
+        {{ t('common.detachInstance') }}
       </button>
     </div>
 
