@@ -11,8 +11,9 @@ function getSavedLocale(): string {
 }
 
 export type MessageSchema = typeof zhCN
+export type Locales = 'zh-CN' | 'en-US'
 
-const i18n = createI18n<[MessageSchema], 'zh-CN' | 'en-US'>({
+const i18n = createI18n<[MessageSchema], Locales>({
   legacy: false,
   locale: getSavedLocale(),
   fallbackLocale: 'zh-CN',
@@ -22,13 +23,13 @@ const i18n = createI18n<[MessageSchema], 'zh-CN' | 'en-US'>({
   }
 })
 
-export function setLocale(locale: string): void {
-  i18n.global.locale.value = locale as 'zh-CN' | 'en-US'
+export function setLocale(locale: Locales): void {
+  ;(i18n.global.locale as unknown as { value: Locales }).value = locale
   localStorage.setItem(STORAGE_KEY, locale)
 }
 
-export function getCurrentLocale(): string {
-  return i18n.global.locale.value
+export function getCurrentLocale(): Locales {
+  return (i18n.global.locale as unknown as { value: Locales }).value
 }
 
 export default i18n
