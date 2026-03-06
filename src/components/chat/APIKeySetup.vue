@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import { useAIChat } from '@/composables/use-chat'
 
+const { t } = useI18n()
 const { apiKey } = useAIChat()
 
 const input = ref('')
@@ -16,7 +18,7 @@ function save() {
 <template>
   <div class="flex flex-1 flex-col items-center justify-center gap-4 px-4">
     <icon-lucide-key-round class="size-8 text-muted" />
-    <p class="text-center text-xs text-muted">Enter your OpenRouter API key to start chatting.</p>
+    <p class="text-center text-xs text-muted">{{ t('chat.enterApiKey') }}</p>
     <form class="flex w-full gap-1.5" @submit.prevent="save">
       <input
         v-model="input"
@@ -29,7 +31,7 @@ function save() {
         class="shrink-0 rounded bg-accent px-2.5 py-1 text-xs font-medium text-white hover:bg-accent/90"
         :disabled="!input.trim()"
       >
-        Save
+        {{ t('chat.save') }}
       </button>
     </form>
     <a
@@ -37,7 +39,7 @@ function save() {
       target="_blank"
       class="text-[10px] text-muted underline hover:text-surface"
     >
-      Get an API key →
+      {{ t('chat.getApiKey') }} →
     </a>
   </div>
 </template>
