@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed, ref, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import { useEditorStore } from '@/stores/editor'
 
+const { t } = useI18n()
 const store = useEditorStore()
 
 const DIVIDER_RE = /^[-–—*\s]+$/
@@ -46,10 +48,10 @@ function onKeydown(e: KeyboardEvent, pageId: string) {
 <template>
   <div class="flex min-h-0 flex-1 flex-col">
     <div class="flex shrink-0 items-center justify-between px-3 py-1.5">
-      <span class="text-[11px] uppercase tracking-wider text-muted">Pages</span>
+      <span class="text-[11px] uppercase tracking-wider text-muted">{{ t('pagesPanel.title') }}</span>
       <button
         class="cursor-pointer rounded border-none bg-transparent px-1 text-base leading-none text-muted hover:bg-hover hover:text-surface"
-        title="Add page"
+        :title="t('pagesPanel.addPage')"
         @click="store.addPage()"
       >
         +

@@ -2,8 +2,11 @@
 import { ref, watch, nextTick } from 'vue'
 import { useEventListener } from '@vueuse/core'
 import { TreeRoot, TreeItem, ContextMenuRoot, ContextMenuTrigger, ContextMenuPortal } from 'reka-ui'
+import { useI18n } from 'vue-i18n'
 
 import NodeContextMenuContent from './NodeContextMenuContent.vue'
+
+const { t } = useI18n()
 
 import IconCircle from '~icons/lucide/circle'
 import IconComponent from '~icons/lucide/diamond'
@@ -280,7 +283,7 @@ function updateDropTarget(ev: PointerEvent) {
       </SplitterResizeHandle>
       <SplitterPanel :default-size="70" :min-size="20" class="flex flex-col overflow-hidden">
         <header class="shrink-0 px-3 py-2 text-[11px] uppercase tracking-wider text-muted">
-          Layers
+          {{ t('layersPanel.title') }}
         </header>
         <ContextMenuRoot :modal="false">
           <ContextMenuTrigger as-child @contextmenu="onLayerRightClick">
