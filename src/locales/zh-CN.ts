@@ -146,7 +146,7 @@ export default {
     nLayers: '{n} 个图层',
     // Variables Section
     openVariables: '打开变量',
-    nVariablesInNCollections: '{n} 个变量在 {n} 个集合中',
+    variableSummary: '{n} 个变量在 {n} 个集合中',
     noLocalVariables: '没有本地变量',
     // Typography Section
     missingFont: '缺少字体',
