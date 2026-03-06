@@ -12,14 +12,26 @@ import {
   MenubarTrigger
 } from 'reka-ui'
 
-import IconChevronRight from '~icons/lucide/chevron-right'
+import {
+  DropdownMenuRoot,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuPortal
+} from 'reka-ui'
 
-import { ref, nextTick } from 'vue'
+import IconChevronRight from '~icons/lucide/chevron-right'
+import IconGlobe from '~icons/lucide/globe'
+
+import { ref, nextTick, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import { IS_TAURI } from '@/constants'
 import { openFileDialog } from '@/composables/use-menu'
 import { useEditorStore } from '@/stores/editor'
+import { setLocale, type Locales } from '@/i18n'
 
+const { t, locale } = useI18n()
 const store = useEditorStore()
 
 const editingName = ref(false)
@@ -41,6 +53,10 @@ function commitRename(input: HTMLInputElement) {
   editingName.value = false
 }
 
+const currentLocaleLabel = computed(() => {
+  return locale.value === 'zh-CN' ? '中文' : 'EN'
+})
+
 const isMac = navigator.platform.includes('Mac')
 const mod = isMac ? '⌘' : 'Ctrl+'
 
@@ -55,17 +71,17 @@ interface MenuItem {
 
 const fileMenu: MenuItem[] = [
   {
-    label: 'New',
+    label: t('menu.new'),
     shortcut: `${mod}N`,
     action: () => import('@/stores/tabs').then((m) => m.createTab())
   },
-  { label: 'Open…', shortcut: `${mod}O`, action: () => openFileDialog() },
+  { label: t('menu.open'), shortcut: `${mod}O`, action: () => openFileDialog() },
   { separator: true },
-  { label: 'Save', shortcut: `${mod}S`, action: () => store.saveFigFile() },
-  { label: 'Save as…', shortcut: `${mod}⇧S`, action: () => store.saveFigFileAs() },
+  { label: t('menu.save'), shortcut: `${mod}S`, action: () => store.saveFigFile() },
+  { label: t('menu.saveAs'), shortcut: `${mod}⇧S`, action: () => store.saveFigFileAs() },
   { separator: true },
   {
-    label: 'Export selection…',
+    label: t('menu.exportSelection'),
     shortcut: `${mod}⇧E`,
     action: () => {
       if (store.state.selectedIds.size > 0) store.exportSelection(1, 'PNG')
@@ -75,75 +91,75 @@ const fileMenu: MenuItem[] = [
 ]
 
 const editMenu: MenuItem[] = [
-  { label: 'Undo', shortcut: `${mod}Z`, action: () => store.undoAction() },
-  { label: 'Redo', shortcut: `${mod}⇧Z`, action: () => store.redoAction() },
+  { label: t('menu.undo'), shortcut: `${mod}Z`, action: () => store.undoAction() },
+  { label: t('menu.redo'), shortcut: `${mod}⇧Z`, action: () => store.redoAction() },
   { separator: true },
-  { label: 'Copy', shortcut: `${mod}C` },
-  { label: 'Paste', shortcut: `${mod}V` },
-  { label: 'Duplicate', shortcut: `${mod}D`, action: () => store.duplicateSelected() },
-  { label: 'Delete', shortcut: '⌫', action: () => store.deleteSelected() },
+  { label: t('menu.copy'), shortcut: `${mod}C` },
+  { label: t('menu.paste'), shortcut: `${mod}V` },
+  { label: t('menu.duplicate'), shortcut: `${mod}D`, action: () => store.duplicateSelected() },
+  { label: t('menu.delete'), shortcut: '⌫', action: () => store.deleteSelected() },
   { separator: true },
-  { label: 'Select all', shortcut: `${mod}A`, action: () => store.selectAll() }
+  { label: t('menu.selectAll'), shortcut: `${mod}A`, action: () => store.selectAll() }
 ]
 
 const viewMenu: MenuItem[] = [
-  { label: 'Zoom to fit', shortcut: '⇧1', action: () => store.zoomToFit() },
+  { label: t('menu.zoomToFit'), shortcut: '⇧1', action: () => store.zoomToFit() },
   {
-    label: 'Zoom in',
+    label: t('menu.zoomIn'),
     shortcut: `${mod}=`,
     action: () => store.applyZoom(-100, window.innerWidth / 2, window.innerHeight / 2)
   },
   {
-    label: 'Zoom out',
+    label: t('menu.zoomOut'),
     shortcut: `${mod}-`,
     action: () => store.applyZoom(100, window.innerWidth / 2, window.innerHeight / 2)
   }
 ]
 
 const objectMenu: MenuItem[] = [
-  { label: 'Group', shortcut: `${mod}G`, action: () => store.groupSelected() },
-  { label: 'Ungroup', shortcut: `${mod}⇧G`, action: () => store.ungroupSelected() },
+  { label: t('menu.group'), shortcut: `${mod}G`, action: () => store.groupSelected() },
+  { label: t('menu.ungroup'), shortcut: `${mod}⇧G`, action: () => store.ungroupSelected() },
   { separator: true },
   {
-    label: 'Create component',
+    label: t('menu.createComponent'),
     shortcut: `${mod}⌥K`,
     action: () => store.createComponentFromSelection()
   },
   {
-    label: 'Create component set',
+    label: t('menu.createComponentSet'),
     action: () => store.createComponentSetFromComponents()
   },
-  { label: 'Detach instance', action: () => store.detachInstance() },
+  { label: t('menu.detachInstance'), action: () => store.detachInstance() },
   { separator: true },
-  { label: 'Bring to front', shortcut: ']', action: () => store.bringToFront() },
-  { label: 'Send to back', shortcut: '[', action: () => store.sendToBack() }
+  { label: t('menu.bringToFront'), shortcut: ']', action: () => store.bringToFront() },
+  { label: t('menu.sendToBack'), shortcut: '[', action: () => store.sendToBack() }
 ]
 
 const textMenu: MenuItem[] = [
-  { label: 'Bold', shortcut: `${mod}B` },
-  { label: 'Italic', shortcut: `${mod}I` },
-  { label: 'Underline', shortcut: `${mod}U` }
+  { label: t('menu.bold'), shortcut: `${mod}B` },
+  { label: t('menu.italic'), shortcut: `${mod}I` },
+  { label: t('menu.underline'), shortcut: `${mod}U` }
 ]
 
 const arrangeMenu: MenuItem[] = [
-  { label: 'Add auto layout', shortcut: '⇧A', action: () => store.wrapInAutoLayout() },
+  { label: t('menu.addAutoLayout'), shortcut: '⇧A', action: () => store.wrapInAutoLayout() },
   { separator: true },
-  { label: 'Align left', shortcut: '⌥A' },
-  { label: 'Align center', shortcut: '⌥H' },
-  { label: 'Align right', shortcut: '⌥D' },
+  { label: t('menu.alignLeft'), shortcut: '⌥A' },
+  { label: t('menu.alignCenter'), shortcut: '⌥H' },
+  { label: t('menu.alignRight'), shortcut: '⌥D' },
   { separator: true },
-  { label: 'Align top', shortcut: '⌥W' },
-  { label: 'Align middle', shortcut: '⌥V' },
-  { label: 'Align bottom', shortcut: '⌥S' }
+  { label: t('menu.alignTop'), shortcut: '⌥W' },
+  { label: t('menu.alignMiddle'), shortcut: '⌥V' },
+  { label: t('menu.alignBottom'), shortcut: '⌥S' }
 ]
 
 const topMenus = [
-  { label: 'File', items: fileMenu },
-  { label: 'Edit', items: editMenu },
-  { label: 'View', items: viewMenu },
-  { label: 'Object', items: objectMenu },
-  { label: 'Text', items: textMenu },
-  { label: 'Arrange', items: arrangeMenu }
+  { label: t('menu.file'), items: fileMenu },
+  { label: t('menu.edit'), items: editMenu },
+  { label: t('menu.view'), items: viewMenu },
+  { label: t('menu.object'), items: objectMenu },
+  { label: t('menu.text'), items: textMenu },
+  { label: t('menu.arrange'), items: arrangeMenu }
 ]
 </script>
 
@@ -166,9 +182,43 @@ const topMenus = [
         @dblclick="startRename"
         >{{ store.state.documentName }}</span
       >
+      <!-- 语言切换按钮 -->
+      <DropdownMenuRoot>
+        <DropdownMenuTrigger as-child>
+          <button
+            class="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded text-muted transition-colors hover:bg-hover hover:text-surface"
+            :title="t('settings.language')"
+          >
+            <IconGlobe class="size-3.5" />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuPortal>
+          <DropdownMenuContent
+            side="bottom"
+            :side-offset="4"
+            align="end"
+            class="min-w-24 rounded-lg border border-border bg-panel p-1 shadow-lg"
+          >
+            <DropdownMenuItem
+              class="flex cursor-pointer items-center rounded-md px-2 py-1.5 text-xs outline-none transition-colors"
+              :class="locale === 'zh-CN' ? 'bg-accent text-white' : 'text-surface hover:bg-hover'"
+              @select="setLocale('zh-CN')"
+            >
+              {{ t('settings.chinese') }}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              class="flex cursor-pointer items-center rounded-md px-2 py-1.5 text-xs outline-none transition-colors"
+              :class="locale === 'en-US' ? 'bg-accent text-white' : 'text-surface hover:bg-hover'"
+              @select="setLocale('en-US')"
+            >
+              {{ t('settings.english') }}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenuPortal>
+      </DropdownMenuRoot>
       <button
         class="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded text-muted transition-colors hover:bg-hover hover:text-surface"
-        title="Toggle UI (⌘\)"
+        :title="`${t('settings.toggleUI')} (⌘\\)`"
         @click="store.state.showUI = !store.state.showUI"
       >
         <icon-lucide-sidebar class="size-3.5" />
