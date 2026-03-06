@@ -13,7 +13,11 @@ export default {
     cut: 'Cut',
     undo: 'Undo',
     redo: 'Redo',
-    selectAll: 'Select all'
+    selectAll: 'Select all',
+    mixed: 'Mixed',
+    layers: 'layers',
+    goToMainComponent: 'Go to Main Component',
+    detachInstance: 'Detach Instance'
   },
   toolbar: {
     move: 'Move',
@@ -77,7 +81,9 @@ export default {
     pages: 'Pages',
     properties: 'Properties',
     chat: 'Chat',
-    collab: 'Collab'
+    collab: 'Collab',
+    ai: 'AI',
+    plugins: 'Plugins'
   },
   properties: {
     appearance: 'Appearance',
@@ -92,17 +98,152 @@ export default {
     cornerRadius: 'Corner radius',
     export: 'Export',
     page: 'Page',
-    variables: 'Variables'
+    variables: 'Variables',
+    // Appearance Section
+    toggleVisibility: 'Toggle visibility',
+    independentCornerRadii: 'Independent corner radii',
+    // Effects Section
+    dropShadow: 'Drop shadow',
+    innerShadow: 'Inner shadow',
+    layerBlur: 'Layer blur',
+    backgroundBlur: 'Background blur',
+    foregroundBlur: 'Foreground blur',
+    clickToReplaceEffects: 'Click + to replace mixed effects',
+    // Fill Section
+    clickToReplaceFills: 'Click + to replace mixed fills',
+    searchVariables: 'Search variables...',
+    noVariablesFound: 'No variables found',
+    applyVariable: 'Apply variable',
+    detachVariable: 'Detach variable',
+    // Stroke Section
+    clickToReplaceStrokes: 'Click + to replace mixed strokes',
+    // Layout Section
+    autoLayout: 'Auto layout',
+    fixedWidth: 'Fixed width',
+    fixedHeight: 'Fixed height',
+    hugContents: 'Hug contents',
+    fillContainer: 'Fill container',
+    clipContent: 'Clip content',
+    individualPadding: 'Individual padding',
+    addAutoLayout: 'Add auto layout',
+    removeAutoLayout: 'Remove auto layout',
+    verticalLayout: 'Vertical layout',
+    horizontalLayout: 'Horizontal layout',
+    wrap: 'Wrap',
+    // Position Section
+    alignLeft: 'Align left',
+    alignCenterHorizontally: 'Align center horizontally',
+    alignRight: 'Align right',
+    alignTop: 'Align top',
+    alignCenterVertically: 'Align center vertically',
+    alignBottom: 'Align bottom',
+    flipHorizontal: 'Flip horizontal',
+    flipVertical: 'Flip vertical',
+    rotate90: 'Rotate 90',
+    // Export Section
+    preview: 'Preview',
+    renderingPreview: 'Rendering preview...',
+    nLayers: '{n} layers',
+    // Variables Section
+    openVariables: 'Open variables',
+    variableSummary: '{n} variables in {n} collections',
+    noLocalVariables: 'No local variables',
+    // Typography Section
+    missingFont: 'Missing font',
+    thin: 'Thin',
+    extraLight: 'ExtraLight',
+    light: 'Light',
+    regular: 'Regular',
+    medium: 'Medium',
+    semiBold: 'SemiBold',
+    bold: 'Bold',
+    extraBold: 'ExtraBold',
+    black: 'Black',
+    strikethrough: 'Strikethrough'
+  },
+  contextMenu: {
+    copy: 'Copy',
+    cut: 'Cut',
+    pasteHere: 'Paste here',
+    duplicate: 'Duplicate',
+    delete: 'Delete',
+    moveToPage: 'Move to page',
+    bringToFront: 'Bring to front',
+    sendToBack: 'Send to back',
+    group: 'Group',
+    ungroup: 'Ungroup',
+    addAutoLayout: 'Add auto layout',
+    createComponent: 'Create component',
+    createComponentSet: 'Create component set',
+    createInstance: 'Create instance',
+    goToMainComponent: 'Go to main component',
+    detachInstance: 'Detach instance',
+    hide: 'Hide',
+    show: 'Show',
+    lock: 'Lock',
+    unlock: 'Unlock',
+    exportAsPng: 'Export as PNG'
   },
   chat: {
     enterApiKey: 'Enter your OpenRouter API key to start chatting.',
     getApiKey: 'Get an API key',
-    save: 'Save'
+    save: 'Save',
+    describeChange: 'Describe a change...',
+    stopGenerating: 'Stop generating',
+    sendMessage: 'Send message',
+    running: 'Running...',
+    done: 'Done',
+    error: 'Error'
   },
   settings: {
     language: 'Language',
     chinese: '中文',
     english: 'English',
     toggleUI: 'Toggle UI'
+  },
+  tabs: {
+    close: 'Close',
+    newTab: 'New Tab'
+  },
+  collab: {
+    title: 'Collab',
+    noUsers: 'No other users',
+    invite: 'Invite',
+    share: 'Share',
+    online: 'Online',
+    offline: 'Offline'
+  },
+  code: {
+    title: 'Code',
+    jsx: 'JSX',
+    css: 'CSS',
+    copyCode: 'Copy code',
+    noSelection: 'Select a node'
+  },
+  pagesPanel: {
+    title: 'Pages',
+    addPage: 'Add page'
+  },
+  layersPanel: {
+    title: 'Layers'
+  },
+  variablesDialog: {
+    localVariables: 'Local variables',
+    noVariableCollections: 'No variable collections',
+    createCollection: 'Create collection',
+    search: 'Search',
+    addCollection: 'Add collection',
+    createVariable: 'Create variable',
+    newVariable: 'New variable',
+    newCollection: 'New collection',
+    mode: 'Mode',
+    name: 'Name',
+    openVariables: 'Open variables',
+    variableSummary: '{n} variables in {n} collections',
+    noLocalVariables: 'No local variables',
+    color: 'Color',
+    number: 'Number',
+    string: 'String',
+    boolean: 'Boolean'
   }
 }

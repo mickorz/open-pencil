@@ -13,7 +13,11 @@ export default {
     cut: '剪切',
     undo: '撤销',
     redo: '重做',
-    selectAll: '全选'
+    selectAll: '全选',
+    mixed: '混合',
+    layers: '个图层',
+    goToMainComponent: '跳转到主组件',
+    detachInstance: '分离实例'
   },
   toolbar: {
     move: '移动',
@@ -77,7 +81,9 @@ export default {
     pages: '页面',
     properties: '属性',
     chat: '聊天',
-    collab: '协作'
+    collab: '协作',
+    ai: 'AI',
+    plugins: '插件'
   },
   properties: {
     appearance: '外观',
@@ -92,17 +98,152 @@ export default {
     cornerRadius: '圆角',
     export: '导出',
     page: '页面',
-    variables: '变量'
+    variables: '变量',
+    // Appearance Section
+    toggleVisibility: '切换可见性',
+    independentCornerRadii: '独立圆角',
+    // Effects Section
+    dropShadow: '投影',
+    innerShadow: '内阴影',
+    layerBlur: '图层模糊',
+    backgroundBlur: '背景模糊',
+    foregroundBlur: '前景模糊',
+    clickToReplaceEffects: '点击 + 替换混合效果',
+    // Fill Section
+    clickToReplaceFills: '点击 + 替换混合填充',
+    searchVariables: '搜索变量...',
+    noVariablesFound: '未找到变量',
+    applyVariable: '应用变量',
+    detachVariable: '分离变量',
+    // Stroke Section
+    clickToReplaceStrokes: '点击 + 替换混合描边',
+    // Layout Section
+    autoLayout: '自动布局',
+    fixedWidth: '固定宽度',
+    fixedHeight: '固定高度',
+    hugContents: '适应内容',
+    fillContainer: '填充容器',
+    clipContent: '裁剪内容',
+    individualPadding: '单独内边距',
+    addAutoLayout: '添加自动布局',
+    removeAutoLayout: '移除自动布局',
+    verticalLayout: '垂直布局',
+    horizontalLayout: '水平布局',
+    wrap: '换行',
+    // Position Section
+    alignLeft: '左对齐',
+    alignCenterHorizontally: '水平居中',
+    alignRight: '右对齐',
+    alignTop: '顶部对齐',
+    alignCenterVertically: '垂直居中',
+    alignBottom: '底部对齐',
+    flipHorizontal: '水平翻转',
+    flipVertical: '垂直翻转',
+    rotate90: '旋转 90 度',
+    // Export Section
+    preview: '预览',
+    renderingPreview: '正在渲染预览...',
+    nLayers: '{n} 个图层',
+    // Variables Section
+    openVariables: '打开变量',
+    nVariablesInNCollections: '{n} 个变量在 {n} 个集合中',
+    noLocalVariables: '没有本地变量',
+    // Typography Section
+    missingFont: '缺少字体',
+    thin: '细体',
+    extraLight: '特细',
+    light: '轻体',
+    regular: '常规',
+    medium: '中等',
+    semiBold: '半粗',
+    bold: '粗体',
+    extraBold: '特粗',
+    black: '黑体',
+    strikethrough: '删除线'
+  },
+  contextMenu: {
+    copy: '拷贝',
+    cut: '剪切',
+    pasteHere: '粘贴到此处',
+    duplicate: '复制',
+    delete: '删除',
+    moveToPage: '移动到页面',
+    bringToFront: '移到最前',
+    sendToBack: '移到最后',
+    group: '编组',
+    ungroup: '取消编组',
+    addAutoLayout: '添加自动布局',
+    createComponent: '创建组件',
+    createComponentSet: '创建组件集',
+    createInstance: '创建实例',
+    goToMainComponent: '跳转到主组件',
+    detachInstance: '分离实例',
+    hide: '隐藏',
+    show: '显示',
+    lock: '锁定',
+    unlock: '解锁',
+    exportAsPng: '导出为 PNG'
   },
   chat: {
     enterApiKey: '请输入你的 OpenRouter API 密钥开始聊天',
     getApiKey: '获取 API 密钥',
-    save: '保存'
+    save: '保存',
+    describeChange: '描述一个更改...',
+    stopGenerating: '停止生成',
+    sendMessage: '发送消息',
+    running: '正在运行...',
+    done: '完成',
+    error: '错误'
   },
   settings: {
     language: '语言',
     chinese: '中文',
     english: 'English',
     toggleUI: '切换界面'
+  },
+  tabs: {
+    close: '关闭',
+    newTab: '新标签页'
+  },
+  collab: {
+    title: '协作',
+    noUsers: '没有其他用户',
+    invite: '邀请',
+    share: '分享',
+    online: '在线',
+    offline: '离线'
+  },
+  code: {
+    title: '代码',
+    jsx: 'JSX',
+    css: 'CSS',
+    copyCode: '复制代码',
+    noSelection: '请选择一个节点'
+  },
+  pagesPanel: {
+    title: '页面',
+    addPage: '添加页面'
+  },
+  layersPanel: {
+    title: '图层'
+  },
+  variablesDialog: {
+    localVariables: '本地变量',
+    noVariableCollections: '没有变量集合',
+    createCollection: '创建集合',
+    search: '搜索',
+    addCollection: '添加集合',
+    createVariable: '创建变量',
+    newVariable: '新变量',
+    newCollection: '新集合',
+    mode: '模式',
+    name: '名称',
+    openVariables: '打开变量',
+    variableSummary: '{n} 个变量在 {n} 个集合中',
+    noLocalVariables: '没有本地变量',
+    color: '颜色',
+    number: '数字',
+    string: '字符串',
+    boolean: '布尔值'
   }
 }
