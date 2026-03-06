@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from 'reka-ui'
+import { useI18n } from 'vue-i18n'
 
 import { useAIChat } from '@/composables/use-chat'
 import { useEditorStore } from '@/stores/editor'
@@ -8,6 +9,7 @@ import ChatPanel from './ChatPanel.vue'
 import CodePanel from './CodePanel.vue'
 import DesignPanel from './DesignPanel.vue'
 
+const { t } = useI18n()
 const store = useEditorStore()
 const { activeTab } = useAIChat()
 </script>
@@ -23,21 +25,21 @@ const { activeTab } = useAIChat()
           value="design"
           class="rounded px-2.5 py-1 text-xs text-muted hover:text-surface data-[state=active]:font-semibold data-[state=active]:text-surface"
         >
-          Design
+          {{ t('panel.design') }}
         </TabsTrigger>
         <TabsTrigger
           value="code"
           class="flex items-center gap-1 rounded px-2.5 py-1 text-xs text-muted hover:text-surface data-[state=active]:font-semibold data-[state=active]:text-surface"
         >
           <icon-lucide-code class="size-3" />
-          Code
+          {{ t('panel.code') }}
         </TabsTrigger>
         <TabsTrigger
           value="ai"
           class="flex items-center gap-1 rounded px-2.5 py-1 text-xs text-muted hover:text-surface data-[state=active]:font-semibold data-[state=active]:text-surface"
         >
           <icon-lucide-sparkles class="size-3" />
-          AI
+          {{ t('panel.ai') }}
         </TabsTrigger>
         <span
           v-if="activeTab === 'design'"

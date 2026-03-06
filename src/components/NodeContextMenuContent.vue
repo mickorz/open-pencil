@@ -9,9 +9,11 @@ import {
   ContextMenuSubContent,
   ContextMenuPortal
 } from 'reka-ui'
+import { useI18n } from 'vue-i18n'
 
 import { useEditorStore } from '@/stores/editor'
 
+const { t } = useI18n()
 const store = useEditorStore()
 
 const hasSelection = computed(() => {
@@ -76,7 +78,7 @@ const menuClass =
       :disabled="!hasSelection"
       @select="document.execCommand('copy')"
     >
-      <span>Copy</span>
+      <span>{{ t('contextMenu.copy') }}</span>
       <span class="text-[11px] text-muted">⌘C</span>
     </ContextMenuItem>
     <ContextMenuItem
@@ -84,11 +86,11 @@ const menuClass =
       :disabled="!hasSelection"
       @select="document.execCommand('cut')"
     >
-      <span>Cut</span>
+      <span>{{ t('contextMenu.cut') }}</span>
       <span class="text-[11px] text-muted">⌘X</span>
     </ContextMenuItem>
     <ContextMenuItem :class="itemClass" @select="document.execCommand('paste')">
-      <span>Paste here</span>
+      <span>{{ t('contextMenu.pasteHere') }}</span>
       <span class="text-[11px] text-muted">⌘V</span>
     </ContextMenuItem>
     <ContextMenuItem
@@ -96,11 +98,11 @@ const menuClass =
       :disabled="!hasSelection"
       @select="store.duplicateSelected()"
     >
-      <span>Duplicate</span>
+      <span>{{ t('contextMenu.duplicate') }}</span>
       <span class="text-[11px] text-muted">⌘D</span>
     </ContextMenuItem>
     <ContextMenuItem :class="itemClass" :disabled="!hasSelection" @select="store.deleteSelected()">
-      <span>Delete</span>
+      <span>{{ t('contextMenu.delete') }}</span>
       <span class="text-[11px] text-muted">⌫</span>
     </ContextMenuItem>
 
@@ -108,7 +110,7 @@ const menuClass =
 
     <ContextMenuSub v-if="otherPages.length > 0 && hasSelection">
       <ContextMenuSubTrigger :class="itemClass">
-        <span>Move to page</span>
+        <span>{{ t('contextMenu.moveToPage') }}</span>
         <span class="text-sm text-muted">›</span>
       </ContextMenuSubTrigger>
       <ContextMenuPortal>
@@ -126,26 +128,26 @@ const menuClass =
     </ContextMenuSub>
 
     <ContextMenuItem :class="itemClass" :disabled="!hasSelection" @select="store.bringToFront()">
-      <span>Bring to front</span>
+      <span>{{ t('contextMenu.bringToFront') }}</span>
       <span class="text-[11px] text-muted">]</span>
     </ContextMenuItem>
     <ContextMenuItem :class="itemClass" :disabled="!hasSelection" @select="store.sendToBack()">
-      <span>Send to back</span>
+      <span>{{ t('contextMenu.sendToBack') }}</span>
       <span class="text-[11px] text-muted">[</span>
     </ContextMenuItem>
 
     <ContextMenuSeparator class="my-1 h-px bg-border" />
 
     <ContextMenuItem :class="itemClass" :disabled="multiCount < 2" @select="store.groupSelected()">
-      <span>Group</span>
+      <span>{{ t('contextMenu.group') }}</span>
       <span class="text-[11px] text-muted">⌘G</span>
     </ContextMenuItem>
     <ContextMenuItem v-if="isGroup" :class="itemClass" @select="store.ungroupSelected()">
-      <span>Ungroup</span>
+      <span>{{ t('contextMenu.ungroup') }}</span>
       <span class="text-[11px] text-muted">⇧⌘G</span>
     </ContextMenuItem>
     <ContextMenuItem v-if="hasSelection" :class="itemClass" @select="store.wrapInAutoLayout()">
-      <span>Add auto layout</span>
+      <span>{{ t('contextMenu.addAutoLayout') }}</span>
       <span class="text-[11px] text-muted">⇧A</span>
     </ContextMenuItem>
 
@@ -156,7 +158,7 @@ const menuClass =
       :disabled="!hasSelection"
       @select="store.createComponentFromSelection()"
     >
-      <span>Create component</span>
+      <span>{{ t('contextMenu.createComponent') }}</span>
       <span class="text-[11px] text-[#9747ff]/60">⌥⌘K</span>
     </ContextMenuItem>
     <ContextMenuItem
@@ -164,7 +166,7 @@ const menuClass =
       :class="componentItemClass"
       @select="store.createComponentSetFromComponents()"
     >
-      <span>Create component set</span>
+      <span>{{ t('contextMenu.createComponentSet') }}</span>
       <span class="text-[11px] text-[#9747ff]/60">⇧⌘K</span>
     </ContextMenuItem>
     <ContextMenuItem
@@ -172,17 +174,17 @@ const menuClass =
       :class="componentItemClass"
       @select="store.createInstanceFromComponent(singleNode!.id)"
     >
-      <span>Create instance</span>
+      <span>{{ t('contextMenu.createInstance') }}</span>
     </ContextMenuItem>
     <ContextMenuItem
       v-if="isInstance"
       :class="componentItemClass"
       @select="store.goToMainComponent()"
     >
-      <span>Go to main component</span>
+      <span>{{ t('contextMenu.goToMainComponent') }}</span>
     </ContextMenuItem>
     <ContextMenuItem v-if="isInstance" :class="itemClass" @select="store.detachInstance()">
-      <span>Detach instance</span>
+      <span>{{ t('contextMenu.detachInstance') }}</span>
       <span class="text-[11px] text-muted">⌥⌘B</span>
     </ContextMenuItem>
 
@@ -190,18 +192,18 @@ const menuClass =
       <ContextMenuSeparator class="my-1 h-px bg-border" />
 
       <ContextMenuItem :class="itemClass" @select="store.toggleVisibility()">
-        <span>{{ isVisible ? 'Hide' : 'Show' }}</span>
+        <span>{{ isVisible ? t('contextMenu.hide') : t('contextMenu.show') }}</span>
         <span class="text-[11px] text-muted">⇧⌘H</span>
       </ContextMenuItem>
       <ContextMenuItem :class="itemClass" @select="store.toggleLock()">
-        <span>{{ isLocked ? 'Unlock' : 'Lock' }}</span>
+        <span>{{ isLocked ? t('contextMenu.unlock') : t('contextMenu.lock') }}</span>
         <span class="text-[11px] text-muted">⇧⌘L</span>
       </ContextMenuItem>
 
       <ContextMenuSeparator class="my-1 h-px bg-border" />
 
       <ContextMenuItem :class="itemClass" @select="store.exportSelection(1, 'PNG')">
-        <span>Export as PNG</span>
+        <span>{{ t('contextMenu.exportAsPng') }}</span>
         <span class="text-[11px] text-muted">⇧⌘E</span>
       </ContextMenuItem>
     </template>
