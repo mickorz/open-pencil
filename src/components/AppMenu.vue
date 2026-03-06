@@ -69,7 +69,7 @@ interface MenuItem {
   sub?: MenuItem[]
 }
 
-const fileMenu: MenuItem[] = [
+const fileMenu = computed<MenuItem[]>(() => [
   {
     label: t('menu.new'),
     shortcut: `${mod}N`,
@@ -88,9 +88,9 @@ const fileMenu: MenuItem[] = [
     },
     disabled: store.state.selectedIds.size === 0
   }
-]
+])
 
-const editMenu: MenuItem[] = [
+const editMenu = computed<MenuItem[]>(() => [
   { label: t('menu.undo'), shortcut: `${mod}Z`, action: () => store.undoAction() },
   { label: t('menu.redo'), shortcut: `${mod}⇧Z`, action: () => store.redoAction() },
   { separator: true },
@@ -100,9 +100,9 @@ const editMenu: MenuItem[] = [
   { label: t('menu.delete'), shortcut: '⌫', action: () => store.deleteSelected() },
   { separator: true },
   { label: t('menu.selectAll'), shortcut: `${mod}A`, action: () => store.selectAll() }
-]
+])
 
-const viewMenu: MenuItem[] = [
+const viewMenu = computed<MenuItem[]>(() => [
   { label: t('menu.zoomToFit'), shortcut: '⇧1', action: () => store.zoomToFit() },
   {
     label: t('menu.zoomIn'),
@@ -114,9 +114,9 @@ const viewMenu: MenuItem[] = [
     shortcut: `${mod}-`,
     action: () => store.applyZoom(100, window.innerWidth / 2, window.innerHeight / 2)
   }
-]
+])
 
-const objectMenu: MenuItem[] = [
+const objectMenu = computed<MenuItem[]>(() => [
   { label: t('menu.group'), shortcut: `${mod}G`, action: () => store.groupSelected() },
   { label: t('menu.ungroup'), shortcut: `${mod}⇧G`, action: () => store.ungroupSelected() },
   { separator: true },
@@ -133,15 +133,15 @@ const objectMenu: MenuItem[] = [
   { separator: true },
   { label: t('menu.bringToFront'), shortcut: ']', action: () => store.bringToFront() },
   { label: t('menu.sendToBack'), shortcut: '[', action: () => store.sendToBack() }
-]
+])
 
-const textMenu: MenuItem[] = [
+const textMenu = computed<MenuItem[]>(() => [
   { label: t('menu.bold'), shortcut: `${mod}B` },
   { label: t('menu.italic'), shortcut: `${mod}I` },
   { label: t('menu.underline'), shortcut: `${mod}U` }
-]
+])
 
-const arrangeMenu: MenuItem[] = [
+const arrangeMenu = computed<MenuItem[]>(() => [
   { label: t('menu.addAutoLayout'), shortcut: '⇧A', action: () => store.wrapInAutoLayout() },
   { separator: true },
   { label: t('menu.alignLeft'), shortcut: '⌥A' },
@@ -151,16 +151,16 @@ const arrangeMenu: MenuItem[] = [
   { label: t('menu.alignTop'), shortcut: '⌥W' },
   { label: t('menu.alignMiddle'), shortcut: '⌥V' },
   { label: t('menu.alignBottom'), shortcut: '⌥S' }
-]
+])
 
-const topMenus = [
-  { label: t('menu.file'), items: fileMenu },
-  { label: t('menu.edit'), items: editMenu },
-  { label: t('menu.view'), items: viewMenu },
-  { label: t('menu.object'), items: objectMenu },
-  { label: t('menu.text'), items: textMenu },
-  { label: t('menu.arrange'), items: arrangeMenu }
-]
+const topMenus = computed(() => [
+  { label: t('menu.file'), items: fileMenu.value },
+  { label: t('menu.edit'), items: editMenu.value },
+  { label: t('menu.view'), items: viewMenu.value },
+  { label: t('menu.object'), items: objectMenu.value },
+  { label: t('menu.text'), items: textMenu.value },
+  { label: t('menu.arrange'), items: arrangeMenu.value }
+])
 </script>
 
 <template>
